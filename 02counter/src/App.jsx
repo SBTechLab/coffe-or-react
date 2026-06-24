@@ -15,6 +15,10 @@ function App() {
    //counter = counter+1
    if(counter < 20){
    setCounter(counter + 1)
+   //setCounter(counter + 1)
+   //setCounter(counter + 1)
+   //setCounter(counter + 1) they all total print only +1 if write
+   //setCounter(prevCountet => prevCounter + 1)  so now take value of last so increment happens and print +4
    }
   };
 
