@@ -1,47 +1,38 @@
 import { useState } from 'react'
-import { FaMoon, FaSun, FaBars, FaTimes } from 'react-icons/fa'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import './App.css'
+import Navbar from './components/Navbar/Navbar'
+import About from './components/About/About'
+import Skills from './components/Skills/Skills'
+import Footer from './components/Footer/Footer'
+import Projects from './pages/Project'
+import Contact from './pages/Contact'
+import NotFound from './pages/NotFound'
 
-function Navbar({ darkMode, toggleDarkMode }) {
-  const [menuOpen, setMenuOpen] = useState(false)
-
-  const links = ['Home', 'About', 'Skills', 'Projects', 'Contact']
+function App() {
+  const [darkMode, setDarkMode] = useState(false)
 
   return (
-    <nav className={`fixed w-full z-50 px-6 py-4 flex justify-between items-center shadow-md ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
-      <h1 className="text-xl font-bold">Smit<span className="text-pink-500">.</span></h1>
-
-      <ul className="hidden md:flex gap-8 font-medium">
-        {links.map((link) => (
-          <li key={link}>
-            <a href={`#${link.toLowerCase()}`} className="hover:text-pink-500 transition">
-              {link}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <div className="flex items-center gap-4">
-        <button onClick={toggleDarkMode} className="text-xl hover:text-pink-500 transition">
-          {darkMode ? <FaSun /> : <FaMoon />}
-        </button>
-        <button className="md:hidden text-xl" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <FaTimes /> : <FaBars />}
-        </button>
+    <BrowserRouter>
+      <div className={`min-h-screen flex flex-col ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
+        <Navbar darkMode={darkMode} toggleDarkMode={() => setDarkMode(!darkMode)} />
+        <main className="flex-1 pt-20">
+          <Routes>
+            <Route path="/" element={
+              <>
+                <About bio="Hi, I'm Smit Kumar B — a 5th Semester B.Tech Computer Engineering student at Charusat University. I'm passionate about web development and love building modern, responsive web applications using React, JavaScript, HTML, CSS, and Tailwind CSS. I enjoy turning ideas into real projects and continuously improving my skills in frontend development." />
+                <Skills />
+              </>
+            } />
+            <Route path="/projects" element={<Projects darkMode={darkMode} />} />
+            <Route path="/contact" element={<Contact darkMode={darkMode} />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        <Footer />
       </div>
-
-      {menuOpen && (
-        <ul className={`absolute top-16 left-0 w-full flex flex-col items-center gap-4 py-6 shadow-md ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
-          {links.map((link) => (
-            <li key={link}>
-              <a href={`#${link.toLowerCase()}`} onClick={() => setMenuOpen(false)} className="hover:text-pink-500 transition">
-                {link}
-              </a>
-            </li>
-          ))}
-        </ul>
-      )}
-    </nav>
+    </BrowserRouter>
   )
 }
 
-export default Navbar
+export default App
