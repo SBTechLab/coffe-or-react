@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FaMoon, FaSun, FaBars, FaTimes } from 'react-icons/fa'
+import {Link} from "react-router-dom"
 
 function Navbar({ darkMode, toggleDarkMode }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -13,9 +14,9 @@ function Navbar({ darkMode, toggleDarkMode }) {
       <ul className="hidden md:flex gap-8 font-medium">
         {links.map((link) => (
           <li key={link}>
-            <a href={`#${link.toLowerCase()}`} className="hover:text-cyan-400 transition">
+            <Link to={`#${link.toLowerCase()}`} className="hover:text-cyan-400 transition">
               {link}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
