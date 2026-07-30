@@ -1,22 +1,24 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { FaMoon, FaSun, FaBars, FaTimes } from 'react-icons/fa'
-import {Link} from "react-router-dom"
 
 function Navbar({ darkMode, toggleDarkMode }) {
   const [menuOpen, setMenuOpen] = useState(false)
 
-  const links = ['Home', 'About', 'Skills', 'Projects', 'Contact']
+  const links = [
+    { label: 'Home', to: '/' },
+    { label: 'Projects', to: '/projects' },
+    { label: 'Contact', to: '/contact' },
+  ]
 
   return (
     <nav className={`fixed w-full z-50 px-6 py-4 flex justify-between items-center shadow-md ${darkMode ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
       <h1 className="text-xl font-bold">Smit<span className="text-cyan-400">.</span></h1>
 
       <ul className="hidden md:flex gap-8 font-medium">
-        {links.map((link) => (
-          <li key={link}>
-            <Link to={`#${link.toLowerCase()}`} className="hover:text-cyan-400 transition">
-              {link}
-            </Link>
+        {links.map(({ label, to }) => (
+          <li key={label}>
+            <Link to={to} className="hover:text-cyan-400 transition">{label}</Link>
           </li>
         ))}
       </ul>
@@ -32,11 +34,9 @@ function Navbar({ darkMode, toggleDarkMode }) {
 
       {menuOpen && (
         <ul className={`absolute top-16 left-0 w-full flex flex-col items-center gap-4 py-6 shadow-md ${darkMode ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'}`}>
-          {links.map((link) => (
-            <li key={link}>
-              <a href={`#${link.toLowerCase()}`} onClick={() => setMenuOpen(false)} className="hover:text-cyan-400 transition">
-                {link}
-              </a>
+          {links.map(({ label, to }) => (
+            <li key={label}>
+              <Link to={to} onClick={() => setMenuOpen(false)} className="hover:text-cyan-400 transition">{label}</Link>
             </li>
           ))}
         </ul>

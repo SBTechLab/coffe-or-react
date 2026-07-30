@@ -132,8 +132,8 @@ function App() {
           Tailwind uses this class to apply dark: variant styles */}
 
         <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-        {/* Navbar is OUTSIDE Routes so it shows on every page
-            darkMode prop → Navbar changes its own background color
+        {/*  Navbar is OUTSIDE Routes so it shows on every page
+           darkMode prop → Navbar changes its own background color
             toggleDarkMode prop → Navbar's sun/moon button calls this to flip theme */}
 
         <Routes>
@@ -343,6 +343,10 @@ function Hero({ darkMode }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.0 }}
       >
+      intial ={{opacity : 0, u: -40}}
+      animate={{opaity:1, y:0}
+      transition={{duration:1.0}}
+      }
       {/* initial = starting state: invisible, 40px above normal position
           animate = end state: fully visible, normal position
           transition duration = 1 second animation */}
@@ -494,7 +498,7 @@ function Projects({ darkMode }) {
           gap-6 = space between cards */}
 
         {projects.map((p) => (
-          <div key={p.title} className={`p-6 rounded-xl shadow-md ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}>
+          <div key={p.title} className={`p-6 rounded-xl shadow-md ${darkMode ? 'bg-gray-800' : 'bg-gray-100'}`}> 0
           {/* key={p.title} = React needs unique key for each list item
               rounded-xl = rounded corners, shadow-md = card shadow */}
             <h3>{p.title}</h3>
@@ -555,7 +559,9 @@ export default Contact
 
 ## File 10 — pages/Contact.jsx (THE CONTROLLED FORM — Assignment Requirement)
 
-This is the Contact PAGE used in the `/contact` route. This is different from components/Contact/Contact.jsx.
+This is the Contact PAGE used in the `/conta
+
+ct` route. This is different from components/Contact/Contact.jsx.
 This one has a CONTROLLED input with useState — which is the assignment requirement.
 
 ```jsx
