@@ -102,6 +102,8 @@ async updatePost({title,slug,content,featuredImage,status,userId})
       }
 
 
+      
+
 
       async getPosts(queries = [Query.equal("status", "acctive")]) {
         
@@ -119,6 +121,9 @@ async updatePost({title,slug,content,featuredImage,status,userId})
         }
       }
 
+
+
+
       async uploadFile(file){
         try {
              return await this.bucket.createFile(
@@ -135,11 +140,30 @@ async updatePost({title,slug,content,featuredImage,status,userId})
       }
 
       
+    
+
+
   async deleteFile(fileId){
+     try { 
+        return await this.bucket.deleteFile(
+            conf.appwriteBucketId,
+            fileId
+        )
+         return true
+
+     }catch (error) {
+        console.log("Appwrite service :: deleteFile :: error", error);
+        return false
+     }
+   }
 
 
 
-
+   getFilePreview(filled){
+      return this.bucket.getFilePreview(
+        conf.appwriteBucketId,
+        fileId
+      )
    }
 }
 
